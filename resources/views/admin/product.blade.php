@@ -1,21 +1,12 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<div class="container">
-    <div class="row">
-        <a href="{{route('create.product')}}" class="btn btn-primary m-5">add product</a>
-    </div>
-    <div class="row">
-        <table class="table table-striped">
-            <thead>
+@extends("admin.layouts.layout")
+@section('content')
+    <div class="container">
+        <div class="row">
+            <a href="{{route('create.category')}}" class="btn btn-primary m-5">add product</a>
+        </div>
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
                 <tr>
                     <th>id</th>
                     <th>name</th>
@@ -24,8 +15,8 @@
                     <th>image</th>
                 </tr>
 
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 @foreach(\App\Models\Product::all() as $item)
                     <tr>
                         <td>{{$item->id}}</td>
@@ -34,14 +25,14 @@
                         <td>{{$item->country}}</td>
                         <td><img src="{{asset('storage/'.$item->image)}}" width="100" alt=""></td>
                         <td>
-                            <form style="display: inline-block" action="{{route('delete.product')}}" method="post">
+                            <form style="display: inline-block" action="{{route('delete.category')}}" method="post">
                                 @csrf
                                 @method('delete')
                                 <input type="hidden" name="id"  value="{{$item->id}}">
                                 <input type="submit" class="btn btn-info" value="delete">
                             </form>
 
-                            <form style="display: inline-block" action="{{route('edit.product')}}" method="post">
+                            <form style="display: inline-block" action="{{route('edit.category')}}" method="post">
                                 @csrf
                                 @method('put')
                                 <input type="hidden" name="id"  value="{{$item->id}}" method="post">
@@ -50,10 +41,8 @@
                         </td>
                     </tr>
                 @endforeach
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-
-</body>
-</html>
+@endsection
