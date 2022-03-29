@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     function index(){
-        return view('product');
+        return view('admin.product');
     }
     function create(){
-        return view('add_product');
+        return view('admin.add_product');
     }
 
     function store(Request $request){
@@ -20,7 +20,7 @@ class ProductController extends Controller
             $product->name = $request ->name;
             $product->price = $request ->price;
             $product->country = $request ->country;
-            $product->image = $request ->file('image')->store('images');
+            $product->images = $request ->file('image')->store('images');
         }
         else{
             $product->name = $request ->name;
@@ -40,7 +40,7 @@ class ProductController extends Controller
             $p['name']=$item->name;
             $p['price']=$item->price;
             $p['country']=$item->country;
-            $p['image']=$item->image;
+            $p['image']=$item->images;
         }
         return view('edit_product',['product'=>$p]);
     }
@@ -51,7 +51,7 @@ function update(Request $request){
             $product->name=$request->name;
             $product->price=$request->price;
             $product->country=$request->country;
-            $product->image=$request->file('image')->store('image');
+            $product->images=$request->file('image')->store('image');
             }
         else{
             $product->name=$request->name;
